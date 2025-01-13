@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aksel Cruses - Portfolio</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+  <script src="script.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -27,7 +28,7 @@
     <h1 class="name">AKSEL CRUSES</h1>
 
     <div class="social-links">
-      <a href="https://www.linkedin.com/in/aksel-cruses-0098a6280/" class="social-link linkedin">
+      <a href="linkedin.com/in/aksel-cruses-0098a6280" class="social-link linkedin">
         <i data-lucide="linkedin"></i>
         <span>LinkedIn</span>
       </a>
@@ -48,33 +49,6 @@
       <span class="footer-text">@axe_mello</span>
     </span>
   </div>
-
-  <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
-
-    // Create bubbles
-    const bubblesContainer = document.querySelector('.bubbles-container');
-    const bubbleCount = 20;
-
-    for (let i = 0; i < bubbleCount; i++) {
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-
-      const size = 20 + Math.random() * 80;
-      const duration = 15 + Math.random() * 20;
-      const delay = -Math.random() * 40;
-      const initialX = Math.random() * 100;
-
-      bubble.style.width = `${size}px`;
-      bubble.style.height = `${size}px`;
-      bubble.style.left = `${initialX}%`;
-      bubble.style.animation = `float ${duration}s infinite linear`;
-      bubble.style.animationDelay = `${delay}s`;
-
-      bubblesContainer.appendChild(bubble);
-    }
-  </script>
 </body>
 
 </html>
