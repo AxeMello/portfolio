@@ -101,12 +101,12 @@ body {
   
 .profile-glow {
     position: absolute;
-    inset: -0.75rem; /* Adjust to make the glow extend beyond the border */
+    inset: -0.75rem;
     background: linear-gradient(to right, #06b6d4, #ec4899, #a855f7);
     filter: blur(12px);
     opacity: 0.5;
     animation: pulse 2s infinite;
-    z-index: 5; /* Keep the glow behind the profile-photo */
+    z-index: 5;
 }
 
 .corner {
