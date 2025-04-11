@@ -6,8 +6,270 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aksel Cruses - Portfolio</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
-  <script src="script.js"></script>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: monospace;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Bubbles Animation */
+    .bubbles-container {
+      position: absolute;
+      inset: 0;
+      opacity: 0.25;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #4a5568, #2d3748);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(-50%);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.5;
+      }
+
+      90% {
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translateY(-100px) translateX(50%);
+        opacity: 0;
+      }
+    }
+
+    /* Circuit Pattern */
+    .circuit-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      background-image:
+        linear-gradient(90deg, transparent 99%, cyan 99%),
+        linear-gradient(0deg, transparent 99%, cyan 99%);
+      background-size: 40px 40px;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
+
+    /* Main Content */
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Profile Photo */
+    .profile-container {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .profile-photo {
+      width: 12rem;
+      height: 12rem;
+      border-radius: 50%;
+      border: 4px solid #06b6d4;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+      background: #1f2937;
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .corner {
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #ec4899;
+    }
+
+    .corner-tl {
+      top: -0.5rem;
+      left: -0.5rem;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    .corner-tr {
+      top: -0.5rem;
+      right: -0.5rem;
+      border-left: 0;
+      border-bottom: 0;
+    }
+
+    .corner-bl {
+      bottom: -0.5rem;
+      left: -0.5rem;
+      border-right: 0;
+      border-top: 0;
+    }
+
+    .corner-br {
+      bottom: -0.5rem;
+      right: -0.5rem;
+      border-left: 0;
+      border-top: 0;
+    }
+
+    /* Name */
+    .name {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin-bottom: 3rem;
+      letter-spacing: 0.1em;
+      background: linear-gradient(to right, #22d3ee, #ec4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.8;
+      }
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 42rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      flex: 1;
+      min-width: 200px;
+      padding: 1rem 1.5rem;
+      background: rgba(17, 24, 39, 0.8);
+      backdrop-filter: blur(4px);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .social-link.linkedin {
+      border: 1px solid #06b6d4;
+      color: #06b6d4;
+    }
+
+    .social-link.github {
+      border: 1px solid #ec4899;
+      color: #ec4899;
+    }
+
+    .social-link.instagram {
+      border: 1px solid #a855f7;
+      color: #a855f7;
+    }
+
+    .social-link:hover {
+      background: rgba(31, 41, 55, 0.8);
+      color: white;
+    }
+
+    .social-link.linkedin:hover {
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+    }
+
+    .social-link.github:hover {
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+    }
+
+    .social-link.instagram:hover {
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+    }
+
+    /* Footer */
+    .footer {
+      position: relative;
+      z-index: 10;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-glow {
+      position: absolute;
+      inset: -0.25rem;
+      background: linear-gradient(to right, #06b6d4, #ec4899, #a855f7);
+      filter: blur(8px);
+      opacity: 0.5;
+      animation: pulse 2s infinite;
+    }
+
+    .footer-text {
+      position: relative;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      padding: 0.25rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 768px) {
+      .name {
+        font-size: 2.5rem;
+      }
+
+      .social-links {
+        flex-direction: column;
+      }
+
+      .social-link {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -43,12 +305,133 @@
     </div>
   </div>
 
-  <div class="footer">
-    <span class="footer-content">
-      <span class="footer-glow"></span>
-      <span class="footer-text">@axe_mello</span>
-    </span>
-  </div>
+  <!-- Add this inside the body, preferably below the profile photo -->
+<div class="typing-box">
+  <span id="typing-text"></span>
+</div>
+
+<style>
+  /* Add this CSS to your <style> section */
+    .typing-box {
+    background-color: #000e36; /* Dark blue background */
+    color: white; /* White font color */
+    padding: 1rem;
+    position: relative;
+    bottom: 120px;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    font-family: monospace;
+    margin: 2rem auto;
+    width: 550px; /* Fixed width */
+    height: 125px; /* Fixed height */
+    text-align: center;
+    box-shadow: 0 0 15px rgba(30, 58, 138, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevent overflow of text */
+  }
+
+  #typing-text {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 2px solid white;
+    animation: blink 0.7s steps(2, start) infinite;
+    word-wrap: break-word; /* Allow text to wrap to the next line */
+    white-space: normal; /* Enable wrapping */
+    text-align: center; /* Center-align the text */
+  }
+
+  @keyframes blink {
+    0%, 100% {
+      border-color: white;
+    }
+    50% {
+      border-color: transparent;
+    }
+  }
+</style>
+
+<script>
+  // Add this JavaScript to your <script> section
+  const sentences = [
+    "I can build cross-platform mobile apps using Flutter for Android and iOS.",
+    "I develop responsive websites using React, HTML, CSS, and JavaScript.",
+    "I have hands-on experience building AI-powered apps using Python, TensorFlow, and YOLO.",
+    "I can integrate databases like MySQL to manage and retrieve large-scale user data efficiently.",
+    "I build user-friendly UIs and scalable backends for full-stack applications.",
+    "I can work with APIs like OpenRouteService to integrate real-time navigation and routing features into apps.",
+    "I constantly upgrade my skills through platforms like Coursera, having completed certifications in Flutter, Python, and Generative AI.",
+    "I built bill order entry and management systems with dynamic table controls and multi-page navigation.",
+    "I have experience integrating machine learning models into applications to provide intelligent solutions.",
+    "I contributed to open-source projects, collaborating with other developers to improve and expand software functionalities.",
+    "I implemented responsive design principles to ensure applications are accessible and user-friendly across various devices.",
+    "I utilized version control systems like Git to manage and track changes in my projects efficiently.",
+    "I applied data analysis techniques to interpret user data, enhancing application performance and user experience."
+  ];
+
+  const typingText = document.getElementById("typing-text");
+  let sentenceIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function type() {
+    const currentSentence = sentences[sentenceIndex];
+    if (isDeleting) {
+      charIndex--;
+    } else {
+      charIndex++;
+    }
+
+    typingText.textContent = currentSentence.slice(0, charIndex);
+
+    if (!isDeleting && charIndex === currentSentence.length) {
+      setTimeout(() => (isDeleting = true), 2000); // Pause before deleting
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      sentenceIndex = (sentenceIndex + 1) % sentences.length; // Move to the next sentence
+    }
+
+    const typingSpeed = isDeleting ? 30 : 60; // Faster when deleting
+    setTimeout(type, typingSpeed);
+  }
+
+  type();
+</script>
+
+<div class="footer">
+  <span class="footer-content">
+    <span class="footer-glow"></span>
+    <span class="footer-text">@axe_mello</span>
+  </span>
+</div>
+
+<script>
+  // Initialize Lucide icons
+  lucide.createIcons();
+
+  // Create bubbles
+  const bubblesContainer = document.querySelector('.bubbles-container');
+  const bubbleCount = 20;
+
+  for (let i = 0; i < bubbleCount; i++) {
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+
+    const size = 20 + Math.random() * 80;
+    const duration = 15 + Math.random() * 20;
+    const delay = -Math.random() * 40;
+    const initialX = Math.random() * 100;
+
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${initialX}%`;
+    bubble.style.animation = `float ${duration}s infinite linear`;
+    bubble.style.animationDelay = `${delay}s`;
+
+    bubblesContainer.appendChild(bubble);
+  }
+</script>
 </body>
 
 </html>
